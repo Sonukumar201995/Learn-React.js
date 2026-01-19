@@ -1,10 +1,10 @@
-import Login from "./userComponent";
+
 function App()
 {
+  const name="sonu kumar"
   return(
     <div>
-   <h1>hello world</h1>
-    <Login/>
+   <h1>hello world {name}</h1>
     </div>
   )
 }
