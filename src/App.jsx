@@ -1,10 +1,12 @@
 
 function App()
 {
-  const name="sonu kumar"
+  function sum(a,b){
+    return a+b;
+  }
   return(
     <div>
-   <h1>hello world {name}</h1>
+   <h1>hello world {sum(10,20)}</h1>
     </div>
   )
 }
