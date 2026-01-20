@@ -1,18 +1,22 @@
 import { useState } from "react";
 
 function App() {
-  const [display, setDisplay] = useState(true);
-
-  const handle = () => {
-    setDisplay(!display);
-  };
+  const [count, setCount] = useState(0);
 
   return (
     <div>
-      <h1>Hide and Show property</h1>
-      <button onClick={handle}>Toggle</button>
+      <h1>Multiple Condition</h1>
+      <h2>Counter 0:{count}</h2>
 
-      {display ? <h1>Sonu Kumar</h1> : null}
+      <button onClick={() => setCount(count + 1)}>
+        Increase
+      </button>
+
+      {
+        count === 0 ? <h2>Condition 1</h2> :
+        count === 1 ? <h2>Condition 2</h2> :
+        <h3>Other Condition</h3>
+      }
     </div>
   );
 }
