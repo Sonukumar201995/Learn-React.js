@@ -1,20 +1,20 @@
 import { useState } from "react";
-import Count from "./counter";
 
+function App() {
+  const [display, setDisplay] = useState(true);
 
-function App(){
-  const [fruit,setFruit]=useState('Apple');
-  const handleFruit=()=>{
-    setFruit("Banana");
-  }
-  return(
+  const handle = () => {
+    setDisplay(!display);
+  };
+
+  return (
     <div>
-    <h1>Use State and Hooks react.js</h1>
-    <h2>{fruit}</h2>
-    <button onClick={handleFruit}>change value</button>
-    <Count/>
+      <h1>Hide and Show property</h1>
+      <button onClick={handle}>Toggle</button>
+
+      {display ? <h1>Sonu Kumar</h1> : null}
     </div>
-  )
+  );
 }
 
 export default App;
