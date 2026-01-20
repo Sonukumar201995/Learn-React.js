@@ -1,16 +1,15 @@
-function App(){
-  function callFun(){
-    alert("function called")
-  }
+import { useState } from "react";
 
-  let fruit=(apple)=>{
-    alert("Apple")
+function App(){
+  const [fruit,setFruit]=useState('Apple');
+  const handleFruit=()=>{
+    setFruit("Banana");
   }
   return(
     <div>
-      <h1>Click Event and function call</h1>
-      <button onClick={callFun}>Click Me</button>
-      <button onClick={()=>fruit("hello")}>Click</button>
+    <h1>Use State and Hooks react.js</h1>
+    <h2>{fruit}</h2>
+    <button onClick={handleFruit}>change value</button>
     </div>
   )
 }
