@@ -2,35 +2,31 @@ import { useState } from "react";
 
 function App(){
 
-  const [skill,Setskill]=useState([])
-  let handle=(event)=>{
-    console.log(event.target.value,event.target.checked)
-    if(event.target.checked)
-    {
-      Setskill([...skill,event.target.value])
-    }else
-    {
-      Setskill([...skill.filter((item)=>item!=event.target.value)])
-    }
-  }
-  return (
+  const [gender,Setgender]=useState('male')
+  const [city,setCity]=useState('delhi')
+  return(
 
     <div>
-      <h1>Handled Checked box</h1>
+      {/* radio button */}
+      <h1>handle Radion and Dropdown</h1>
+      <h2>Select Gender :{gender}</h2>
+      <input onChange={(event)=>Setgender(event.target.value)} type="radio" checked={gender=='male'} name="gender" value="male" id="male"/>
+      <label htmlFor="male">Male</label>
+      <input onChange={(event=>Setgender(event.target.value))} type="radio" checked={gender=='female'} name="gender" value="female" id="female"/>
+      <label htmlFor="female">Female</label>
+    
+    <h4>Selected Gender :{gender}</h4>
 
-      <input onChange={handle} type="checkbox" id="php" value="php"/>
-      <label htmlFor="php">PHP</label>
-      <br /><br />
-      <input onChange={handle} type="checkbox" id="js" value="js"/>
-      <label htmlFor="js">JS</label>
-      <br /><br />
-      <input onChange={handle} type="checkbox" id="node" value="node"/>
-      <label htmlFor="node">Node</label>
-      <br /><br />
-      <h2>{skill.toString()}</h2>
+
+    {/* dropdown   */}
+    <h3>Select City :{city}</h3>
+    <select onChange={(event)=>setCity(event.target.value)} defaultValue={"delhi"}>
+    <option value="noida">Noida</option>
+    <option value="delhi">Delhi</option>
+    <option value="gurugaon">Gurugoan</option>
+    </select>
+    <h4>{city}</h4>
     </div>
   )
 }
-
 export default App;
-
