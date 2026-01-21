@@ -1,24 +1,36 @@
 import { useState } from "react";
 
 function App(){
-  const[name,setName]=useState("");
-  const [password,setPassword]=useState("");
-  const [email,setEmail]=useState("");
+
+  const [skill,Setskill]=useState([])
+  let handle=(event)=>{
+    console.log(event.target.value,event.target.checked)
+    if(event.target.checked)
+    {
+      Setskill([...skill,event.target.value])
+    }else
+    {
+      Setskill([...skill.filter((item)=>item!=event.target.value)])
+    }
+  }
   return (
 
-    <>
-    <h2>Controlled component</h2>
-    
-      <input type="text" value={name} onChange={(event)=>setName(event.target.value)} placeholder="Enter Name"/><br /><br />
-      <input type="password" value={password} onChange={(event)=>setPassword(event.target.value)} placeholder="Enter password"/><br /><br />
-      <input type="email" value={email} onChange={(event)=>setEmail(event.target.value)} placeholder="email"/><br /><br />
-      <button onClick={()=>{setName("");setPassword("");setEmail("");}}>clear</button><br /><br />
-      <button >Sumit</button>
-    <h2>{name}</h2>
-    <h2>{password}</h2>
-    <h2>{email}</h2>
-    </>
+    <div>
+      <h1>Handled Checked box</h1>
+
+      <input onChange={handle} type="checkbox" id="php" value="php"/>
+      <label htmlFor="php">PHP</label>
+      <br /><br />
+      <input onChange={handle} type="checkbox" id="js" value="js"/>
+      <label htmlFor="js">JS</label>
+      <br /><br />
+      <input onChange={handle} type="checkbox" id="node" value="node"/>
+      <label htmlFor="node">Node</label>
+      <br /><br />
+      <h2>{skill.toString()}</h2>
+    </div>
   )
 }
 
 export default App;
+
