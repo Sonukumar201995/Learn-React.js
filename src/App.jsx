@@ -1,32 +1,42 @@
-import { useState } from "react";
+function App() {
+  const users = [
+    {
+      name: "sonu",
+      email: "sonu@1234.com",
+      age: 30,
+    },
+    {
+      name: "monu",
+      email: "monu@1234.com",
+      age: 30,
+    },
+  ];
 
-function App(){
-
-  const [gender,Setgender]=useState('male')
-  const [city,setCity]=useState('delhi')
-  return(
-
+  return (
     <div>
-      {/* radio button */}
-      <h1>handle Radion and Dropdown</h1>
-      <h2>Select Gender :{gender}</h2>
-      <input onChange={(event)=>Setgender(event.target.value)} type="radio" checked={gender=='male'} name="gender" value="male" id="male"/>
-      <label htmlFor="male">Male</label>
-      <input onChange={(event=>Setgender(event.target.value))} type="radio" checked={gender=='female'} name="gender" value="female" id="female"/>
-      <label htmlFor="female">Female</label>
-    
-    <h4>Selected Gender :{gender}</h4>
+      <h1>Loop in JSX with map function</h1>
 
+      <table border="1" cellPadding="10">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+          </tr>
+        </thead>
 
-    {/* dropdown   */}
-    <h3>Select City :{city}</h3>
-    <select onChange={(event)=>setCity(event.target.value)} defaultValue={"delhi"}>
-    <option value="noida">Noida</option>
-    <option value="delhi">Delhi</option>
-    <option value="gurugaon">Gurugoan</option>
-    </select>
-    <h4>{city}</h4>
+        <tbody>
+          {users.map((user, index) => (
+            <tr key={index}>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.age}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-  )
+  );
 }
+
 export default App;
