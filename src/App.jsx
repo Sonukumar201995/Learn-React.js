@@ -1,9 +1,11 @@
-function App(){
-  return(
+import styled from "styled-components";
 
-    <div>
-      <h2 style={{color:'red',backgroundColor:'green'}}>Inline css in React js</h2>
-    </div>
+function App()
+{
+  const heading=styled.h4;
+  return(
+      <heading>styled components</heading>
   )
 }
+
 export default App;
