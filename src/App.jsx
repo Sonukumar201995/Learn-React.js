@@ -1,11 +1,19 @@
-import styled from "styled-components";
+import { useRef } from "react";
 
 function App()
 {
-  const heading=styled.h4;
+
+ let inputRef=useRef(null);
+ const handleRef=()=>{
+  console.log(inputRef);
+  inputRef.current.focus();
+ }
   return(
-      <heading>styled components</heading>
+    <>
+    <h1>useRef in React js</h1>
+    <input ref={inputRef} type="text" placeholder="Enter Name" />
+    <button onClick={handleRef}>focus</button>
+    </>
   )
 }
-
 export default App;
