@@ -1,20 +1,35 @@
-import { useTransition } from "react";
+import { useState } from "react";
 
-function App()
-{
+function App() {
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState('');
 
-  const [pending,startTransition]=useTransition();
-  const handleButton=()=>{
-    startTransition(async()=>{
-      await new Promise (res=>setTimeout(res,2000));
-    })
-  }
-  return(
+  const handleUser = () => {
+    if (user.trim() === '') return; // avoid empty input
+    setUsers([...users, user]);
+    setUser(''); // clear input after add
+  };
+
+  console.log(users);
+
+  return (
     <div>
-      <h2>useTransition Hook</h2>
-      <button disabled ={pending} onClick={handleButton}>Click</button>
+      <p>Derived Hooks</p>
+      <input
+        type="text"
+        value={user}
+        onChange={(event) => setUser(event.target.value)}
+        placeholder="Add New User"
+      />
+      <button onClick={handleUser}>Add User</button>
+
+      <ul>
+        {users.map((u, index) => (
+          <li key={index}>{u}</li>
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
 
 export default App;
