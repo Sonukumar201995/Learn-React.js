@@ -1,69 +1,21 @@
 import { useState } from "react";
 
 function App() {
-  const [data, setData] = useState({
-    name: "sonu",
-    address: {
-      city: "Delhi",
-      country: "India"
-    }
-  });
+  const [names, setNames] = useState(["Sonu", "Amit"]);
 
-  const handleName = (val) => {
-    setData(prev => ({
-      ...prev,
-      name: val
-    }));
-  };
-
-  const handleCity = (val) => {
-    setData(prev => ({
-      ...prev,
-      address: {
-        ...prev.address,
-        city: val
-      }
-    }));
-  };
-
-  const handleCountry = (val) => {
-    setData(prev => ({
-      ...prev,
-      address: {
-        ...prev.address,
-        country: val
-      }
-    }));
+  const addName = () => {
+    setNames([...names, "Rahul"]);
   };
 
   return (
     <div>
-      <h1>Updating Objects in State</h1>
+      <h1>Updating array in React</h1>
 
-      <input
-        type="text"
-        placeholder="Enter Name"
-        value={data.name}
-        onChange={(e) => handleName(e.target.value)}
-      />
+      {names.map((item, index) => (
+        <h2 key={index}>{item}</h2>
+      ))}
 
-      <input
-        type="text"
-        placeholder="Enter City"
-        value={data.address.city}
-        onChange={(e) => handleCity(e.target.value)}
-      />
-
-      <input
-        type="text"
-        placeholder="Enter Country"
-        value={data.address.country}
-        onChange={(e) => handleCountry(e.target.value)}
-      />
-
-      <h2>Name: {data.name}</h2>
-      <h2>City: {data.address.city}</h2>
-      <h2>Country: {data.address.country}</h2>
+      <button onClick={addName}>Add Name</button>
     </div>
   );
 }
