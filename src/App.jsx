@@ -1,37 +1,25 @@
-import { useActionState } from "react";
+import useToggle from "./useToggle";
 
 function App() {
-
-  const handleSubmit = (previousData, formData) => {
-    let name = formData.get('name');
-    let password = formData.get('password');
-
-    console.log("handleSubmit called", name, password);
-
-    return { name, password }; // new state return karna hota hai
-  }
-
-  const [data, action, pending] = useActionState(handleSubmit, null);
+  const [value, toggleValue] = useToggle(true);
 
   return (
     <div>
-      <h2>useActionState in React</h2>
+      <button onClick={() => toggleValue()}>
+        Toggle heading
+      </button>
 
-      <form action={action}>
-        <input type="text" placeholder="Enter Name" name="name" />
-        <br /><br />
-        <input type="text" placeholder="Enter Password" name="password" />
-        <br /><br />
-        <button disabled={pending}>Submit Data</button>
-      </form>
+      <button onClick={() => toggleValue(true)}>
+        Show heading
+      </button>
 
-      {data && (
-        <h3>
-          Name: {data.name} | Password: {data.password}
-        </h3>
-      )}
+      <button onClick={() => toggleValue(false)}>
+        Hide heading
+      </button>
+
+      {value && <h1>custom hook</h1>}
     </div>
-  )
+  );
 }
 
 export default App;
