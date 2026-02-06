@@ -1,25 +1,17 @@
-import useToggle from "./useToggle";
+import Collage from "./Collage";
+import { Subjectcontext } from "./Context";
 
-function App() {
-  const [value, toggleValue] = useToggle(true);
-
-  return (
-    <div>
-      <button onClick={() => toggleValue()}>
-        Toggle heading
-      </button>
-
-      <button onClick={() => toggleValue(true)}>
-        Show heading
-      </button>
-
-      <button onClick={() => toggleValue(false)}>
-        Hide heading
-      </button>
-
-      {value && <h1>custom hook</h1>}
-    </div>
-  );
+function App(){
+  return(
+  
+      <div style={{backgroundColor:'yellow', padding:10}}>
+        <Subjectcontext.Provider value="English">
+          <h1>Context Api</h1>
+          <Collage/>
+        </Subjectcontext.Provider>
+      </div>
+  
+  )
 }
 
 export default App;
