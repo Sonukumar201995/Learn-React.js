@@ -4,6 +4,7 @@ import Contact from "./Contact";
 import Login from "./Login";
 import NavBar from "./assets/NavBar";
 import NotFound from "./NotFound";
+import College from "./College";
 
 function App() {
   return (
@@ -13,6 +14,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
+
+        <Route path="/college" element={<College />}>
+          {/* yahan nested routes aa sakte hain */}
+        </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
