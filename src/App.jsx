@@ -1,28 +1,26 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import Contact from "./Contact";
-import Login from "./Login";
-import NavBar from "./assets/NavBar";
-import NotFound from "./NotFound";
-import College from "./College";
+import { useEffect, useState } from "react";
 
-function App() {
+export default function App() {
+  const [usersData, setUsersData] = useState([]);
+
+  useEffect(() => {
+    getUsersData();
+  }, []);
+
+  async function getUsersData() {
+    const url = "https://dummyjson.com/users";
+    let response = await fetch(url);
+    let data = await response.json();
+    setUsersData(data.users);
+  }
+
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
+    <div>
+      <h1>Fetch data from API</h1>
 
-        <Route path="/college" element={<College />}>
-          {/* yahan nested routes aa sakte hain */}
-        </Route>
-
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+      {usersData.map((user) => (
+        <h1 key={user.id}>{user.firstName}</h1>
+      ))}
+    </div>
   );
 }
-
-export default App;
