@@ -1,26 +1,31 @@
 import { useEffect, useState } from "react";
 
 export default function App() {
-  const [usersData, setUsersData] = useState([]);
 
+
+  const [userData,setUserData]=useState([]);
   useEffect(() => {
-    getUsersData();
-  }, []);
+    getUserData();
+  }, []);  
 
-  async function getUsersData() {
-    const url = "https://dummyjson.com/users";
+  const getUserData = async () => {
+    const url = "http://localhost:3000/users";
+
     let response = await fetch(url);
-    let data = await response.json();
-    setUsersData(data.users);
-  }
+    response=await response.json();  
+
+    console.log(response);
+    setUserData(response);
+  };
 
   return (
     <div>
-      <h1>Fetch data from API</h1>
-
-      {usersData.map((user) => (
-        <h1 key={user.id}>{user.firstName}</h1>
-      ))}
+      <h1>Integrate Json Server API and Loader</h1>
+      {
+      userData.map((user) => {
+        return <h1 key={user.id}>{user.name}</h1>;
+      })
+    }
     </div>
   );
 }
