@@ -1,31 +1,22 @@
-import { useEffect, useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import UserAdd from "./UserAdd";
+import UserList from "./UserList";
 
 export default function App() {
-
-
-  const [userData,setUserData]=useState([]);
-  useEffect(() => {
-    getUserData();
-  }, []);  
-
-  const getUserData = async () => {
-    const url = "http://localhost:3000/users";
-
-    let response = await fetch(url);
-    response=await response.json();  
-
-    console.log(response);
-    setUserData(response);
-  };
-
   return (
     <div>
-      <h1>Integrate Json Server API and Loader</h1>
-      {
-      userData.map((user) => {
-        return <h1 key={user.id}>{user.name}</h1>;
-      })
-    }
+      <h1>Make Routes and pages for Add user and user List UI</h1>
+
+      {/* Navigation */}
+      <nav>
+        <Link to="/add">Add User</Link> |{" "}
+        <Link to="/list">User List</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/add" element={<UserAdd />} />
+        <Route path="/list" element={<UserList />} />
+      </Routes>
     </div>
   );
 }
