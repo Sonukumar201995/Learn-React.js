@@ -1,65 +1,42 @@
-import { useState } from "react"
+import { useActionState } from "react";
 
 export default function App() {
 
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
-  const [nameErr, setNameErr] = useState('')
-  const [passErr, setPassErr] = useState('')
+  const handleLogin = async (prevState, formData) => {
+    const name = formData.get("name");
+    const password = formData.get("password");
 
-  const handleName = (event) => {
-    const value = event.target.value
-    setName(value)
-
-    if (value.length > 5) {
-      setNameErr('Only 5 characters allowed')
-    } else {
-      setNameErr('')
+    if (!name || !password) {
+      return { error: "All fields are required" };
     }
-  }
 
-  const handlePassword = (event) => {
-    const value = event.target.value
-    setPassword(value)
-
-    const passwordRegex = /^(?=.*\d).{6,}$/
-
-    if (!passwordRegex.test(value)) {
-      setPassErr('Password must be 6+ characters and contain at least 1 number')
-    } else {
-      setPassErr('')
+    if (password.length < 6) {
+      return { error: "Password must be at least 6 characters" };
     }
-  }
+
+    return { success: "Login successful" };
+  };
+
+  const [state, action, isPending] = useActionState(handleLogin, null);
 
   return (
     <div>
-      <h2>Simple Validation in React</h2>
+      <h1>Validation with useActionState in React</h1>
 
-      <input
-        type="text"
-        value={name}
-        onChange={handleName}
-        placeholder="Enter your name"
-      />
-      <br />
-      <span style={{ color: "red" }}>{nameErr}</span>
+      <form action={action}>
+        <input type="text" name="name" placeholder="Enter your name" />
+        <br /><br />
 
-      <br /><br />
+        <input type="password" name="password" placeholder="Enter your password" />
+        <br /><br />
 
-      <input
-        type="password"
-        value={password}
-        onChange={handlePassword}
-        placeholder="Enter your password"
-      />
-      <br />
-      <span style={{ color: "red" }}>{passErr}</span>
+        <button disabled={isPending}>
+          {isPending ? "Logging in..." : "Login"}
+        </button>
+      </form>
 
-      <br /><br />
-
-      <button disabled={nameErr || passErr}>
-        Login
-      </button>
+      {state?.error && <p style={{ color: "red" }}>{state.error}</p>}
+      {state?.success && <p style={{ color: "green" }}>{state.success}</p>}
     </div>
-  )
+  );
 }
