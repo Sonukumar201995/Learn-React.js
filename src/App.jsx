@@ -1,44 +1,17 @@
-import { useReducer } from "react"
+import { lazy, Suspense, useState } from "react"
+// import User from "./User"
 
-    const emptyData={
-        name:'',
-        password:'',
-        email:'',
-        city:'',
-        address:''
-    }
-
-    const reducer=(data,action)=>{
-        return {...data,[action.type]:action.val}
-    }
-
-export default function App(){
-
-    const[state,dispatch]=useReducer(reducer,emptyData)
-    console.log(state);
+const User= lazy(()=>import('./User'))
+export default function App()
+{
+    const [load,setLoad]=useState(false)
     return(
         <div>
-            <h2>use useReducer</h2>
-
-            <input type="text" onChange={(event)=>dispatch({val:event.target.value,type:'name'})} placeholder="Enter Your Name"/>
-            <br /><br />
-            <input type="text" onChange={(event)=>dispatch({val:event.target.value,type:'password'})} placeholder="Enter Your Password"/>
-            <br /><br />
-            <input type="text" onChange={(event)=>dispatch({val:event.target.value,type:'email'})} placeholder="Enter Email"/>
-            <br /><br />
-            <input type="text" onChange={(event)=>dispatch({val:event.target.value,type:'city'})} placeholder="Enter City"/>
-            <br /><br />
-            <input type="text" onChange={(event)=>dispatch({val:event.target.value,type:'address'})} placeholder="Enter Address"/>
-            <br /><br />
-            <ul>
-                <li>Name:{state.name}</li>
-                <li>Password:{state.password}</li>
-                <li>Email:{state.email}</li>
-                <li>City:{state.city}</li>
-                <li>Address:{state.address}</li>
-            </ul>
-            <button>Add Details</button>
-            
+            <h2>Lazy Loading</h2>
+           {
+            load? <Suspense fallback={<h3>loading.....</h3>}> <User/> </Suspense>:null
+           }
+            <button onClick={()=>setLoad(true)}>Load User</button>
         </div>
     )
 }
